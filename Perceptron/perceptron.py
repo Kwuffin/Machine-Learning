@@ -1,3 +1,12 @@
+def step(x):
+    """
+    Step function
+    :param x: 64 bit integer
+    :return:
+    """
+    return int(x >= 0)
+
+
 class Perceptron:
     def __init__(self, name, weights, bias):
         self.name = name        # String
@@ -24,23 +33,9 @@ class Perceptron:
 
             total = sum(weighted) + self.bias  # Add bias to sum of weighted inputs
 
-            if total >= 0:
-                self.output += 1
-
-            return self.output
+            return step(total)
 
         # If there are not enough weights for inputs, or vice versa.
         else:
             print("Inputs and weights do not have an equal amount of values!")
             exit()
-
-
-class PerceptronLayer:
-    def __init__(self):
-        self.perceptrons = Perceptron
-
-
-class PerceptronNetwork:
-    def __init__(self):
-        self.layers = PerceptronLayer
-
