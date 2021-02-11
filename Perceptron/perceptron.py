@@ -37,5 +37,6 @@ class Perceptron:
 
         # If there are not enough weights for inputs, or vice versa.
         else:
-            print("Inputs and weights do not have an equal amount of values!")
-            exit()
+            raise Exception(f"Inputs and Weights do not have an equal amount of elements\n"
+                            f"Inputs:  {len(inputs)}\n"
+                            f"Weights: {len(self.weights)}")
