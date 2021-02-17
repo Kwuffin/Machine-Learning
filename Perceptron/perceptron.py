@@ -71,5 +71,6 @@ class Perceptron:
             new_weights = []
             for i in range(len(self.weights)):
                 new_weight = self.weights[i] + (learning_rate * (target - a) * inputs[i])
+                new_weights.append(new_weight)
 
             self.weights = new_weights
