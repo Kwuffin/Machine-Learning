@@ -74,3 +74,13 @@ class Perceptron:
                 new_weights.append(new_weight)
 
             self.weights = new_weights
+
+    def error(self, inputs: [[int]], targets: [int]):
+        errors = []
+        for i in range(len(inputs)):
+            a = self.calc(inputs[i])
+
+            error = targets[i] - a
+            errors.append(error)
+
+        return sum(errors) / len(errors)
