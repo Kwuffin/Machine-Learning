@@ -24,14 +24,14 @@ def train_perceptron(perceptron, bit_combinations, targets):
 
             epochs += 1
 
+            if epochs == 2000:
+                print(f"No correct weights and biases found within {epochs} iterations for '{perceptron.name}'.\n")
+                return
+
         if values == targets:
             print(f"Target outputs have been reached after {epochs} iteration(s).\n")
             print(f"Final weights and bias:\n"
                   f"{perceptron.__str__()}")
-            break
-
-        if epochs == 10000:
-            print(f"No correct weights and biases found within 4000 iterations for '{perceptron.name}'.\n")
             break
 
 
@@ -53,15 +53,26 @@ def xor_gate_train():
     train_perceptron(xor_gate, bit_combinations, and_targets)
 
 
-def iris_train():
+def iris_train_two():
     seed(1763456)
-    iris_perceptron = Perceptron("Iris", [randint(-5, 5), randint(-5, 5), randint(-5, 5), randint(-5, 5)], randint(-5, 5))
+    iris_perceptron_two = Perceptron("Iris perceptron 2 targets", [randint(-5, 5), randint(-5, 5), randint(-5, 5), randint(-5, 5)], randint(-5, 5))
 
     data = load_iris()
     inputs = list(data.data[:100])
     targets = list(data.target[:100])
 
-    train_perceptron(iris_perceptron, inputs, targets)
+    train_perceptron(iris_perceptron_two, inputs, targets)
+
+
+def iris_train_three():
+    seed(1763456)
+    iris_perceptron_three = Perceptron("Iris perceptron 3 targets", [randint(-5, 5), randint(-5, 5), randint(-5, 5), randint(-5, 5)], randint(-5, 5))
+
+    data = load_iris()
+    inputs = list(data.data)
+    targets = list(data.target)
+
+    train_perceptron(iris_perceptron_three, inputs, targets)
 
 
 def main():
@@ -69,8 +80,10 @@ def main():
     and_gate_train()
     print("====================| Xor-Gate: |====================")
     xor_gate_train()
-    print("====================| Iris Data: |====================")
-    iris_train()
+    print("====================| Iris Data met twee targets: |====================")
+    iris_train_two()
+    print("====================| Iris Data met drie targets: |====================")
+    iris_train_three()
 
 
 if __name__ == '__main__':
