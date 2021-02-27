@@ -31,7 +31,7 @@ def train_perceptron(perceptron, bit_combinations, targets):
             break
 
         if epochs == 10000:
-            print(f"No correct weights and biases found within 4000 iterations for '{perceptron.name}'.")
+            print(f"No correct weights and biases found within 4000 iterations for '{perceptron.name}'.\n")
             break
 
 
