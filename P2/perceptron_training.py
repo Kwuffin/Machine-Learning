@@ -4,26 +4,34 @@ from random import seed  # Is used to set the seed for the iris dataset
 from sklearn.datasets import load_iris
 
 
-def train_perceptron(gate, bit_combinations, targets):
+def train_perceptron(perceptron, bit_combinations, targets):
+    """
+    Changes weights and biases to reach the given targets.
+
+    :param perceptron: Any perceptron class
+    :param bit_combinations: All possible inputs
+    :param targets: All targets that want to be reached
+    :return:
+    """
     epochs = 0
     while True:
-        values = []
+        values = []  # Actual values from calculation with previous weight(s) and bias
         for i in range(len(bit_combinations)):
-            a = gate.calc(bit_combinations[i])
+            a = perceptron.calc(bit_combinations[i])
             values.append(a)
 
-            gate.update(target=targets[i], inputs=bit_combinations[i], learning_rate=0.3)
+            perceptron.update(target=targets[i], inputs=bit_combinations[i], learning_rate=0.3)
 
             epochs += 1
 
         if values == targets:
             print(f"Target outputs have been reached after {epochs} iteration(s).\n")
             print(f"Final weights and bias:\n"
-                  f"{gate.__str__()}")
+                  f"{perceptron.__str__()}")
             break
 
-        if epochs == 1000:
-            print(f"No correct weights and biases found within 4000 iterations for '{gate.name}'.")
+        if epochs == 10000:
+            print(f"No correct weights and biases found within 4000 iterations for '{perceptron.name}'.")
             break
 
 
@@ -56,12 +64,12 @@ def iris_train():
     train_perceptron(iris_perceptron, inputs, targets)
 
 
-
 def main():
-    # print("====================| And-Gate: |====================")
-    # and_gate_train()
-    # print("====================| Xor-Gate: |====================")
-    # xor_gate_train()
+    print("====================| And-Gate: |====================")
+    and_gate_train()
+    print("====================| Xor-Gate: |====================")
+    xor_gate_train()
+    print("====================| Iris Data: |====================")
     iris_train()
 
 
