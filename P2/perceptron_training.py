@@ -47,17 +47,22 @@ def xor_gate_train():
 
 def iris_train():
     seed(1763456)
-    iris_perceptron = Perceptron("Iris", [randint(-5, 5), randint(-5, 5)], randint(-5, 5))
+    iris_perceptron = Perceptron("Iris", [randint(-5, 5), randint(-5, 5), randint(-5, 5), randint(-5, 5)], randint(-5, 5))
+
     data = load_iris()
-    print(data['data'])
+    inputs = list(data.data[:100])
+    targets = list(data.target[:100])
+
+    train_perceptron(iris_perceptron, inputs, targets)
+
 
 
 def main():
-    print("====================| And-Gate: |====================")
-    and_gate_train()
-    print("====================| Xor-Gate: |====================")
-    xor_gate_train()
-    # iris_train()
+    # print("====================| And-Gate: |====================")
+    # and_gate_train()
+    # print("====================| Xor-Gate: |====================")
+    # xor_gate_train()
+    iris_train()
 
 
 if __name__ == '__main__':
