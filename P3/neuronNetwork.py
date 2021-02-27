@@ -6,7 +6,9 @@ class NeuronNetwork:
         self.layers = neuronLayers
 
     def __str__(self):
-        return f"This network exists of {len(self.layers)} layers"
+        return f"This network exists of {len(self.layers)} layers.\n" \
+               f"It takes {len(self.layers[0])} inputs.\n" \
+               f"It gives {len(self.layers[-1])} outputs."
 
     def feed_forward(self, inputs):
         for layer in self.layers:
