@@ -57,7 +57,7 @@ for i in inputs_4:
 print()
 
 # OR-GATE
-or_gate = Neuron("Or gate", [75, 75], -100)
+or_gate = Neuron("Or gate", [150, 150], -100)
 print("Or-poort:")
 for i in inputs_4:
     print(f"{i} --> {round(or_gate.calc(i))} (actual value: {or_gate.calc(i)})")
