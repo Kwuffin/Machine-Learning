@@ -25,7 +25,7 @@ class NeuronNetwork:
         :return:
         """
         for layer in self.layers:
-            inputs = layer.update(inputs, learning_rate)
+            layer.update(inputs, learning_rate)
 
     def train(self, inputs: List[List[float]], targets: List[float], learning_rate: float):
         """
@@ -58,11 +58,6 @@ class NeuronNetwork:
                         for j, neuron in enumerate(layer.neurons):
                             error = neuron.calc_error_hidden(self.layers[i], j)
                             errors.append(error)
-                            outputs.append(neuron.output)
-
-                for e in errors:  # If any error is below value
-                    if e < 0.00000001:
-                        return iterations, errors, outputs
 
                 # Update weights and biases
                 self.update(training_example, learning_rate)
