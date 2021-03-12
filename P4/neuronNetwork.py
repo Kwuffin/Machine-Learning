@@ -27,9 +27,10 @@ class NeuronNetwork:
         for layer in self.layers:
             layer.update(inputs, learning_rate)
 
-    def train(self, inputs: List[List[float]], targets: List[float], learning_rate: float):
+    def train(self, inputs: List[List[float]], targets: List[float], learning_rate: float, user_iterations: int):
         """
         Trains the neural network
+        :param user_iterations: Maximum amount of iterations
         :param inputs: All training examples
         :param targets: Targets for every training example given
         :param learning_rate:
@@ -37,21 +38,32 @@ class NeuronNetwork:
         """
         iterations = 0
         # Stop at 4000 iterations
-        while iterations < 4000:
+        while iterations < user_iterations:
             iterations += 1
             outputs = []  # Outputs of all training examples
+
             for input_index, training_example in enumerate(inputs):
                 self.feed_forward(training_example)  # The feed forward makes sure all neurons have an error attribute
                 errors = []  # All errors in a list
 
                 for i, layer in enumerate(reversed(self.layers)):
+
                     # If current layer is the output layer
                     if i == 0:
                         # Calculate the output of every output neuron
-                        for neuron in layer.neurons:
-                            error = neuron.calc_error(training_example, targets[input_index])
-                            errors.append(error)
-                            outputs.append(neuron.output)
+                        for neuron_index, neuron in enumerate(layer.neurons):
+
+                            # If the output layer has one output neuron
+                            # print(type(targets[input_index]))
+                            if isinstance(targets[input_index], list):
+                                error = neuron.calc_error(training_example, targets[input_index][neuron_index])
+                                errors.append(error)
+                                outputs.append(neuron.output)
+
+                            else:
+                                error = neuron.calc_error(training_example, targets[input_index])
+                                errors.append(error)
+                                outputs.append(neuron.output)
 
                     else:
                         # Calculate the output of every hidden neuron
