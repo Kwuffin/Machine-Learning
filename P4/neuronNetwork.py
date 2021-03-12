@@ -34,13 +34,13 @@ class NeuronNetwork:
         while iterations < 4000:
             iterations += 1
             outputs = []
-            for training_example in inputs:
+            for input_index, training_example in enumerate(inputs):
                 self.feed_forward(training_example)
                 errors = []
                 for i, layer in enumerate(reversed(self.layers)):
                     if i == 0:
                         for neuron in layer.neurons:
-                            error = neuron.calc_error(training_example, targets[i])
+                            error = neuron.calc_error(training_example, targets[input_index])
                             errors.append(error)
                             outputs.append(neuron.output)
 
