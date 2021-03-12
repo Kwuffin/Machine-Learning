@@ -59,6 +59,7 @@ class NeuronNetwork:
                                 errors.append(error)
                                 outputs.append(neuron.output)
 
+                            # If there is only one output neuron
                             else:
                                 error = neuron.calc_error(training_example, targets[input_index])
                                 errors.append(error)
