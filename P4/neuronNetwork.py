@@ -40,9 +40,10 @@ class NeuronNetwork:
         # Stop at 4000 iterations
         while iterations < user_iterations:
             iterations += 1
-            outputs = []  # Outputs of all training examples
+            outputs_total = []  # Outputs of all training examples
 
             for input_index, training_example in enumerate(inputs):
+                outputs = []
                 self.feed_forward(training_example)  # The feed forward makes sure all neurons have an error attribute
                 errors = []  # All errors in a list
 
@@ -71,7 +72,9 @@ class NeuronNetwork:
                             error = neuron.calc_error_hidden(self.layers[i], j)
                             errors.append(error)
 
+                outputs_total.append(outputs)
+
                 # Update weights and biases
                 self.update(training_example, learning_rate)
 
-        return iterations, errors, outputs
+        return iterations, errors, outputs_total
