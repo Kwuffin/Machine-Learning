@@ -27,7 +27,7 @@ class NeuronNetwork:
         for layer in self.layers:
             layer.update(inputs, learning_rate)
 
-    def train(self, inputs: List[List[float]], targets: List[float], learning_rate: float, user_iterations: int):
+    def train(self, inputs: List[List[float]], targets, learning_rate: float, user_iterations: int):
         """
         Trains the neural network
         :param user_iterations: Maximum amount of iterations
@@ -54,7 +54,6 @@ class NeuronNetwork:
                         for neuron_index, neuron in enumerate(layer.neurons):
 
                             # If the output layer has one output neuron
-                            # print(type(targets[input_index]))
                             if isinstance(targets[input_index], list):
                                 error = neuron.calc_error(training_example, targets[input_index][neuron_index])
                                 errors.append(error)
